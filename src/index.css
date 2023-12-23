@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
 body {
   background: theme("colors.dark");
   color: theme("colors.white");
   min-height: theme("height.screen");
+}
+
+.banner {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.MovieRow:hover .opacity-0 {
+  opacity: 100%;
 }

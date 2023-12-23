@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { MovieResponse, MovieResult, fetchRequest } from "../common/api";
 import { ChevronLeftIcon } from "@heroicons/react/16/solid";
 import { ChevronRightIcon } from "@heroicons/react/16/solid";
+import MovieCard from "./movieCard";
 type props = {
   title: string;
   endPoint: string;
@@ -42,6 +43,8 @@ const ContentRows = ({ title, endPoint }: props) => {
   }
 
   useEffect(() => {
+    console.log(rowData[0]);
+
     if (rowData.length) {
       if (containerRef.current) {
         cardVisibleInRow.current = Math.floor(
@@ -55,14 +58,10 @@ const ContentRows = ({ title, endPoint }: props) => {
     fetchRowData();
   }, []);
 
-  const generateImageUrl = (path: string, width: number): string => {
-    return `${import.meta.env.VITE_IMAGE_BASE_URL}w${width}${path}`;
-  };
-
   const onNextClick = () => {
     console.log(translateX);
     console.log(getTranslateXValue());
-    if (sliderRef.current && translateX >= -48) {
+    if (sliderRef.current && translateX >= -(getTranslateXValue() * 2)) {
       let updatedTranslateX = translateX - getTranslateXValue();
 
       console.log(updatedTranslateX);
@@ -89,7 +88,7 @@ const ContentRows = ({ title, endPoint }: props) => {
   };
 
   return (
-    <section className="w-screen scroll-smooth">
+    <section className="MovieRow w-screen scroll-smooth">
       <h2 className="m-4">{title}</h2>
 
       <section
@@ -98,33 +97,23 @@ const ContentRows = ({ title, endPoint }: props) => {
       >
         <button
           onClick={onPrevClick}
-          className=" absolute z-[1]  h-full w-8  bg-black/60"
+          className=" absolute z-[1]  h-full w-8  bg-black/60 opacity-0"
         >
           <ChevronLeftIcon />
         </button>
         <button
           onClick={onNextClick}
-          className=" absolute right-2 z-[1]  h-full  w-8 bg-black/60"
+          className=" absolute right-2 z-[1]  h-full  w-8 bg-black/60 opacity-0"
         >
           <ChevronRightIcon />
         </button>
 
         <section
           ref={sliderRef}
-          className="flex gap-1 transition-transform  duration-700"
+          className="flex gap-2 transition-transform  duration-700"
         >
           {rowData?.map((row) => {
-            const { id, title, poster_path } = row;
-
-            return (
-              <section className="  h-[250px] w-[200px]  shrink-0" key={id}>
-                <img
-                  className="h-full w-full object-contain"
-                  src={generateImageUrl(poster_path, CARD_WIDTH)}
-                  alt={title}
-                />
-              </section>
-            );
+            return <MovieCard key={row.id} {...row} />;
           })}
         </section>
       </section>
