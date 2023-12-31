@@ -11,7 +11,7 @@ const Header = () => {
     <header className=" relative z-10  bg-black/30 py-1">
       <nav className=" g-4 grid  grid-cols-[200px_auto_200px] items-center">
         <section className="h-12">
-          <Link to="/browse">
+          <Link to="/">
             <img
               className="h-full w-full object-contain"
               src={netflixLogo}
@@ -23,7 +23,7 @@ const Header = () => {
         <section className="text-sm text-gray-300">
           <ul className="flex gap-4  font-normal">
             <li>
-              <NavLink className={isActiveLink} to="/browse">
+              <NavLink className={isActiveLink} to="/">
                 Home
               </NavLink>
             </li>

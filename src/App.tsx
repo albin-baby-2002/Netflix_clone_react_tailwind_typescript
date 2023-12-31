@@ -11,8 +11,12 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromChildren(
       <>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Browse />} />
+        </Route>
+        
         <Route
-          path="/"
+          path="/default"
           element={<p className=" bg-red-500 px-4 py-3 sm:px-2">default</p>}
         />
 
@@ -22,13 +26,10 @@ function App() {
         />
 
         <Route
-          path="/"
-          element={<p className=" bg-red-500 px-4 py-3 sm:px-2">default</p>}
+          path="/random"
+          element={<p className=" bg-red-500 px-4 py-3 sm:px-2">random</p>}
         />
 
-        <Route path="/browse" element={<Layout />}>
-          <Route index element={<Browse />} />
-        </Route>
 
         <Route path="/latest" element={<Layout />}>
           <Route index element={<p> some </p>} />
